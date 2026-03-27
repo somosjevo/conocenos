@@ -1,0 +1,1421 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <!-- ============================================================
+       TÍTULO DE LA PESTAÑA DEL NAVEGADOR
+       Cambia "Jevo | Velas & Jabones Artesanales" por lo que desees
+       ============================================================ -->
+  <title>Jevo | Velas & Jabones Artesanales</title>
+
+  <!-- Google Fonts: Cormorant Garamond (títulos elegantes) + Nunito (cuerpo legible) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Nunito:wght@300;400;600&display=swap" rel="stylesheet"/>
+
+  <!-- Iconos de Font Awesome (para las redes sociales y detalles) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <style>
+    /* ============================================================
+       VARIABLES DE COLOR — Edita aquí para cambiar toda la paleta
+       --verde:     Color principal (nav, acentos, botones)
+       --dorado:    Detalles y hover states
+       --rosado:    Fondo de secciones alternas, badges
+       --crema:     Fondo principal de la página
+       ============================================================ */
+    :root {
+      --verde:  #5e6136;
+      --dorado: #af8c4a;
+      --rosado: #ceaca2;
+      --crema:  #fef1de;
+
+      --font-titulo: 'Cormorant Garamond', serif;
+      --font-cuerpo: 'Nunito', sans-serif;
+
+      --sombra: 0 8px 32px rgba(94,97,54,0.12);
+      --radio:  18px;
+      --transicion: 0.35s cubic-bezier(.4,0,.2,1);
+    }
+
+    /* ============================================================
+       RESET & BASE
+       ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--crema);
+      color: #3a3a2e;
+      font-family: var(--font-cuerpo);
+      font-weight: 300;
+      line-height: 1.75;
+      overflow-x: hidden;
+    }
+
+    img { display: block; width: 100%; }
+
+    a { text-decoration: none; color: inherit; }
+
+    /* ============================================================
+       BARRA DE NAVEGACIÓN
+       Para cambiar los links del menú, edita las etiquetas <a>
+       dentro de <nav> en el HTML
+       ============================================================ */
+    header {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      z-index: 1000;
+      background: rgba(254,241,222,0.88);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(175,140,74,0.2);
+      transition: background var(--transicion);
+    }
+
+    nav {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    /* Logo / nombre del negocio */
+    .logo {
+      font-family: var(--font-titulo);
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--verde);
+      letter-spacing: 3px;
+    }
+
+    /* Links del menú de navegación */
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.82rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--verde);
+      font-weight: 600;
+      position: relative;
+      padding-bottom: 4px;
+    }
+
+    /* Línea animada debajo de cada link al hacer hover */
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 0; height: 2px;
+      background: var(--dorado);
+      transition: width var(--transicion);
+    }
+    .nav-links a:hover::after { width: 100%; }
+
+    /* Botón hamburguesa para móvil (visible solo en pantallas pequeñas) */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 26px; height: 2px;
+      background: var(--verde);
+      transition: var(--transicion);
+    }
+    /* Animación al abrir el menú móvil */
+    .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); }
+
+    /* ============================================================
+       HÉROE — Sección principal (pantalla completa)
+       Cambia el texto de bienvenida y el subtítulo en el HTML
+       Para cambiar la imagen de fondo, modifica background-image
+       o agrega un <img> dentro de .hero-img-wrap
+       ============================================================ */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding-top: 72px;
+    }
+
+    .hero-content {
+      padding: 6rem 4rem 6rem 6rem;
+      animation: fadeUp 1s ease both;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: var(--rosado);
+      color: var(--verde);
+      font-size: 0.72rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      font-weight: 600;
+      padding: 6px 18px;
+      border-radius: 50px;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-titulo {
+      font-family: var(--font-titulo);
+      font-size: clamp(3rem, 5vw, 5.5rem);
+      line-height: 1.05;
+      color: var(--verde);
+      font-weight: 300;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-titulo em {
+      font-style: italic;
+      color: var(--dorado);
+    }
+
+    .hero-sub {
+      font-size: 1rem;
+      color: #6b6b4e;
+      max-width: 420px;
+      margin-bottom: 2.5rem;
+    }
+
+    /* Botón principal CTA */
+    .btn {
+      display: inline-block;
+      background: var(--verde);
+      color: var(--crema);
+      padding: 14px 36px;
+      border-radius: 50px;
+      font-size: 0.82rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 600;
+      font-family: var(--font-cuerpo);
+      transition: background var(--transicion), transform var(--transicion);
+      cursor: pointer;
+      border: none;
+    }
+    .btn:hover { background: var(--dorado); transform: translateY(-2px); }
+
+    /* Botón secundario (outline) */
+    .btn-outline {
+      background: transparent;
+      color: var(--verde);
+      border: 2px solid var(--verde);
+      margin-left: 1rem;
+    }
+    .btn-outline:hover { background: var(--verde); color: var(--crema); }
+
+    /* Panel decorativo derecho del héroe */
+    .hero-img-wrap {
+      height: 100%;
+      min-height: 100vh;
+      background: var(--rosado);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Ornamento decorativo grande */
+    .hero-img-wrap::before {
+      content: '✦';
+      position: absolute;
+      font-size: 32rem;
+      color: rgba(254,241,222,0.12);
+      top: -6rem;
+      right: -6rem;
+      pointer-events: none;
+    }
+
+    /* Emoji decorativo central (reemplaza con una imagen real si tienes) */
+    .hero-icon {
+      font-size: 10rem;
+      animation: float 4s ease-in-out infinite;
+      filter: drop-shadow(0 20px 40px rgba(94,97,54,0.25));
+    }
+
+    /* Texto vertical decorativo */
+    .hero-vertical-text {
+      position: absolute;
+      bottom: 3rem;
+      left: -3.5rem;
+      transform: rotate(-90deg);
+      font-size: 0.68rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--verde);
+      opacity: 0.6;
+      white-space: nowrap;
+    }
+
+    /* ============================================================
+       FRANJA DE VALORES (debajo del héroe)
+       Agrega o quita <div class="valor-item"> para más valores
+       ============================================================ */
+    .valores {
+      background: var(--verde);
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0;
+    }
+
+    .valor-item {
+      flex: 1 1 220px;
+      padding: 2rem 2.5rem;
+      text-align: center;
+      color: var(--crema);
+      border-right: 1px solid rgba(254,241,222,0.15);
+      transition: background var(--transicion);
+    }
+    .valor-item:last-child { border-right: none; }
+    .valor-item:hover { background: rgba(175,140,74,0.3); }
+
+    .valor-icono { font-size: 1.8rem; margin-bottom: 0.5rem; }
+    .valor-titulo { font-family: var(--font-titulo); font-size: 1.2rem; margin-bottom: 0.25rem; }
+    .valor-desc { font-size: 0.78rem; opacity: 0.75; letter-spacing: 0.5px; }
+
+    /* ============================================================
+       SECCIÓN: CATÁLOGO DE PRODUCTOS
+       Para AGREGAR un producto: copia un bloque .producto-card
+       Para EDITAR precio/nombre: cambia el texto dentro de la tarjeta
+       Para QUITAR un producto: borra el bloque .producto-card completo
+       ============================================================ */
+    .seccion {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 7rem 2rem;
+    }
+
+    .seccion-label {
+      font-size: 0.72rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--dorado);
+      font-weight: 600;
+      display: block;
+      margin-bottom: 0.75rem;
+    }
+
+    .seccion-titulo {
+      font-family: var(--font-titulo);
+      font-size: clamp(2.2rem, 4vw, 3.5rem);
+      color: var(--verde);
+      font-weight: 300;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+
+    .seccion-titulo em { font-style: italic; color: var(--dorado); }
+
+    .seccion-desc {
+      max-width: 520px;
+      font-size: 0.95rem;
+      color: #6b6b4e;
+      margin-bottom: 3.5rem;
+    }
+
+    /* Filtros de categoría (Todos / Velas / Jabones) */
+    .filtros {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-bottom: 3rem;
+    }
+
+    .filtro-btn {
+      padding: 8px 24px;
+      border-radius: 50px;
+      border: 2px solid var(--verde);
+      background: transparent;
+      color: var(--verde);
+      font-size: 0.78rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      font-family: var(--font-cuerpo);
+      font-weight: 600;
+      transition: var(--transicion);
+    }
+    .filtro-btn.activo,
+    .filtro-btn:hover {
+      background: var(--verde);
+      color: var(--crema);
+    }
+
+    /* Grid de tarjetas de productos */
+    .productos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .producto-card {
+      background: #fff;
+      border-radius: var(--radio);
+      overflow: hidden;
+      box-shadow: var(--sombra);
+      transition: transform var(--transicion), box-shadow var(--transicion);
+      cursor: pointer;
+    }
+    .producto-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 50px rgba(94,97,54,0.18);
+    }
+
+    /* Área de imagen / emoji del producto */
+    .producto-img {
+      background: var(--rosado);
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Badge de categoría */
+    .producto-badge {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      background: var(--verde);
+      color: var(--crema);
+      font-size: 0.65rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 50px;
+      font-weight: 600;
+    }
+
+    .producto-body { padding: 1.5rem; }
+
+    .producto-nombre {
+      font-family: var(--font-titulo);
+      font-size: 1.35rem;
+      color: var(--verde);
+      margin-bottom: 0.4rem;
+    }
+
+    .producto-desc {
+      font-size: 0.82rem;
+      color: #888;
+      margin-bottom: 1rem;
+      line-height: 1.5;
+    }
+
+    .producto-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .producto-precio {
+      font-family: var(--font-titulo);
+      font-size: 1.5rem;
+      color: var(--dorado);
+      font-weight: 600;
+    }
+
+    /* Botón de pedir (dentro de la tarjeta) */
+    .btn-pedir {
+      background: var(--rosado);
+      color: var(--verde);
+      border: none;
+      padding: 8px 18px;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      cursor: pointer;
+      font-family: var(--font-cuerpo);
+      transition: background var(--transicion);
+    }
+    .btn-pedir:hover { background: var(--verde); color: var(--crema); }
+
+    /* ============================================================
+       SECCIÓN: SOBRE NOSOTROS
+       Edita el texto en el HTML dentro de la sección #nosotros
+       ============================================================ */
+    #nosotros {
+      background: var(--rosado);
+    }
+
+    .nosotros-wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 7rem 2rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
+    }
+
+    .nosotros-visual {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Cuadro decorativo detrás de la imagen */
+    .nosotros-visual::before {
+      content: '';
+      position: absolute;
+      width: 85%;
+      height: 85%;
+      border: 3px solid var(--verde);
+      border-radius: var(--radio);
+      top: -20px;
+      left: -20px;
+    }
+
+    .nosotros-box {
+      background: var(--crema);
+      border-radius: var(--radio);
+      width: 100%;
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9rem;
+      position: relative;
+      box-shadow: var(--sombra);
+    }
+
+    /* Estadísticas debajo de la imagen */
+    .stats {
+      display: flex;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat-num {
+      font-family: var(--font-titulo);
+      font-size: 2.5rem;
+      color: var(--verde);
+      font-weight: 600;
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.72rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #7a6b66;
+    }
+
+    .nosotros-texto { }
+
+    .nosotros-historia {
+      font-size: 0.95rem;
+      color: #6b5e5a;
+      margin-bottom: 1.5rem;
+      line-height: 1.9;
+    }
+
+    /* Lista de valores del negocio */
+    .nosotros-lista {
+      list-style: none;
+      margin-top: 1.5rem;
+    }
+
+    .nosotros-lista li {
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(94,97,54,0.15);
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      color: var(--verde);
+      font-weight: 600;
+    }
+
+    .nosotros-lista li span { font-size: 1.2rem; }
+
+    /* ============================================================
+       SECCIÓN: CONTACTO Y REDES SOCIALES
+       Para agregar/quitar una red social, agrega o borra
+       un bloque .red-card en el HTML
+       ============================================================ */
+    .contacto-wrap {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .redes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    /* Tarjeta de red social */
+    .red-card {
+      background: #fff;
+      border-radius: var(--radio);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      box-shadow: var(--sombra);
+      transition: transform var(--transicion), box-shadow var(--transicion);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: inherit;
+    }
+    .red-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 50px rgba(94,97,54,0.18);
+    }
+
+    .red-icono {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: #fff;
+    }
+
+    /* Colores individuales de cada red — edítalos si cambias de red */
+    .red-icono.instagram { background: linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); }
+    .red-icono.facebook  { background: #1877f2; }
+    .red-icono.tiktok    { background: #010101; }
+    .red-icono.whatsapp  { background: #25d366; }
+
+    .red-nombre {
+      font-family: var(--font-titulo);
+      font-size: 1.2rem;
+      color: var(--verde);
+    }
+
+    .red-usuario {
+      font-size: 0.78rem;
+      color: #999;
+      letter-spacing: 0.5px;
+    }
+
+    /* ============================================================
+       FOOTER
+       Cambia el año y el texto del footer en el HTML
+       ============================================================ */
+    footer {
+      background: var(--verde);
+      color: rgba(254,241,222,0.8);
+      text-align: center;
+      padding: 2.5rem 2rem;
+      font-size: 0.82rem;
+      letter-spacing: 1px;
+    }
+
+    footer strong {
+      color: var(--dorado);
+      font-family: var(--font-titulo);
+      font-size: 1.1rem;
+    }
+
+    .footer-divider {
+      width: 40px;
+      height: 1px;
+      background: var(--dorado);
+      margin: 1rem auto;
+    }
+
+    /* ============================================================
+       ANIMACIONES
+       ============================================================ */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-18px); }
+    }
+
+    /* Clase para animación de entrada por scroll */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.9s ease, transform 0.9s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Retrasos escalonados para las tarjetas */
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* ============================================================
+       RESPONSIVO — Ajustes para pantallas pequeñas (móvil)
+       ============================================================ */
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; }
+
+      .hero-content {
+        padding: 5rem 2rem 3rem;
+        text-align: center;
+      }
+      .hero-sub { margin: 0 auto 2rem; }
+
+      .hero-img-wrap { min-height: 50vh; }
+      .hero-vertical-text { display: none; }
+
+      .nosotros-wrap { grid-template-columns: 1fr; gap: 3rem; }
+      .nosotros-visual::before { display: none; }
+
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        position: fixed;
+        top: 72px; left: 0;
+        width: 100%;
+        background: var(--crema);
+        padding: 2rem;
+        gap: 1.5rem;
+        border-bottom: 1px solid rgba(175,140,74,0.2);
+      }
+      .nav-links.abierto { display: flex; }
+      .hamburger { display: flex; }
+
+      .stats { justify-content: center; }
+    }
+
+    @media (max-width: 500px) {
+      .hero-titulo { font-size: 2.8rem; }
+      .btn-outline { margin-left: 0; margin-top: 0.75rem; }
+      .hero-content .botones { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       BARRA DE NAVEGACIÓN
+       Agrega o quita <li><a> para cambiar el menú
+       ============================================================ -->
+  <header>
+    <nav>
+      <!-- Nombre/Logo del negocio — cámbialo aquí -->
+      <a class="logo" href="#inicio">JEVO</a>
+
+      <!-- Menú principal -->
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#catalogo">Catálogo</a></li>
+        <li><a href="#nosotros">Nosotros</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+
+      <!-- Botón hamburguesa (solo móvil) -->
+      <button class="hamburger" id="hamburger" aria-label="Menú">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </header>
+
+
+  <!-- ============================================================
+       SECCIÓN HÉROE
+       Cambia el badge, título y subtítulo aquí
+       ============================================================ -->
+  <section class="hero" id="inicio">
+
+    <div class="hero-content">
+      <!-- Badge pequeño encima del título -->
+      <span class="hero-badge">✦ Artesanal &amp; Natural</span>
+
+      <!-- Título principal — usa <em> para texto en cursiva dorada -->
+      <h1 class="hero-titulo">
+        Hecho con <em>amor</em>,<br/>
+        creado para tu <em>hogar</em>
+      </h1>
+
+      <!-- Subtítulo descriptivo -->
+      <p class="hero-sub">
+        Velas y jabones artesanales elaborados con ingredientes naturales,
+        pensados para transformar tu espacio y cuidar tu bienestar.
+      </p>
+
+      <!-- Botones de acción -->
+      <div class="botones">
+        <a href="#catalogo" class="btn">Ver catálogo</a>
+        <a href="#contacto" class="btn btn-outline">Hacer un pedido</a>
+      </div>
+    </div>
+
+    <!-- Panel decorativo derecho del héroe -->
+    <div class="hero-img-wrap">
+      <!--
+        IMAGEN DEL HÉROE:
+        Si tienes una foto, reemplaza el emoji por:
+        <img src="tu-foto.jpg" alt="Jevo velas y jabones"
+             style="width:100%;height:100%;object-fit:cover;"/>
+      -->
+      <div class="hero-icon">🕯️</div>
+      <p class="hero-vertical-text">Jevo — Velas &amp; Jabones Artesanales</p>
+    </div>
+
+  </section>
+
+
+  <!-- ============================================================
+       FRANJA DE VALORES
+       Agrega, edita o elimina <div class="valor-item"> según necesites
+       ============================================================ -->
+  <div class="valores">
+
+    <div class="valor-item reveal">
+      <div class="valor-icono">🌿</div>
+      <div class="valor-titulo">100% Natural</div>
+      <div class="valor-desc">Ingredientes puros y de calidad</div>
+    </div>
+
+    <div class="valor-item reveal reveal-delay-1">
+      <div class="valor-icono">🤲</div>
+      <div class="valor-titulo">Artesanal</div>
+      <div class="valor-desc">Elaborado a mano con dedicación</div>
+    </div>
+
+    <div class="valor-item reveal reveal-delay-2">
+      <div class="valor-icono">🏡</div>
+      <div class="valor-titulo">Para tu hogar</div>
+      <div class="valor-desc">Diseñado para ambientar tu espacio</div>
+    </div>
+
+    <div class="valor-item reveal reveal-delay-3">
+      <div class="valor-icono">💛</div>
+      <div class="valor-titulo">Con amor</div>
+      <div class="valor-desc">Cada pieza lleva nuestra pasión</div>
+    </div>
+
+  </div>
+
+  <!-- ============================================================
+       SECCIÓN: CATÁLOGO DE PRODUCTOS
+       ============================================================ -->
+  <section id="catalogo">
+    <div class="seccion">
+
+      <span class="seccion-label reveal">Nuestros productos</span>
+      <h2 class="seccion-titulo reveal">Catálogo <em>Jevo</em></h2>
+      <p class="seccion-desc reveal">
+        Cada pieza es única. Selecciona la categoría que te interese
+        y encuentra el producto perfecto para ti o para regalar a alguien especial.
+      </p>
+
+      <!-- Botones de filtro por categoría -->
+      <div class="filtros">
+        <button class="filtro-btn activo" data-filtro="todos">Todos</button>
+        <button class="filtro-btn" data-filtro="vela">Velas</button>
+        <button class="filtro-btn" data-filtro="jabon">Jabones</button>
+        <button class="filtro-btn" data-filtro="sets">Sets</button>
+      </div>
+
+      <!-- =====================================================
+           GRID DE PRODUCTOS
+           Para AGREGAR: copia un bloque .producto-card completo
+           Para EDITAR: cambia nombre, descripción, precio y emoji
+           Para QUITAR: borra el bloque .producto-card
+           El atributo data-categoria debe ser "vela" o "jabon"
+           ===================================================== -->
+      <div class="productos-grid" id="productosGrid">
+
+        <!-- ——— PRODUCTO 1 ——— -->
+        <div class="producto-card reveal" data-categoria="vela">
+          <div class="producto-img" style="background:#e8d5b5;">
+            🥥
+            <span class="producto-badge">Vela</span>
+          </div>
+          <div class="producto-body">
+            <h3 class="producto-nombre">Vela de Coco</h3>
+            <p class="producto-desc">Aroma relajante ideal para meditación y descanso. Cera natural de Coco.</p>
+            <div class="producto-footer">
+              <!-- Cambia el precio aquí -->
+              <span class="producto-precio">Q55.00</span>
+              <button class="btn-pedir" onclick="pedirProducto('Vela de Lavanda')">Pedir</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ——— PRODUCTO 2 ——— -->
+        <div class="producto-card reveal reveal-delay-1" data-categoria="vela">
+          <div class="producto-img">
+            🌹
+            <span class="producto-badge">Vela</span>
+          </div>
+          <div class="producto-body">
+            <h3 class="producto-nombre">Vela de Rosas</h3>
+            <p class="producto-desc">Energizante y fresca, perfecta para el área de trabajo y cocina.</p>
+            <div class="producto-footer">
+              <span class="producto-precio">Q55.00</span>
+              <button class="btn-pedir" onclick="pedirProducto('Vela Cítrica')">Pedir</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ——— PRODUCTO 3 ——— -->
+        <div class="producto-card reveal reveal-delay-2" data-categoria="vela">
+          <div class="producto-img" style="background:#e8d5b5;">
+            🍊
+            <span class="producto-badge">Vela</span>
+          </div>
+          <div class="producto-body">
+            <h3 class="producto-nombre">Vela de Mandarina</h3>
+            <p class="producto-desc">Trae la frescura del bosque a tu hogar con notas de pino y cedro.</p>
+            <div class="producto-footer">
+              <span class="producto-precio">Q50.00</span>
+              <button class="btn-pedir" onclick="pedirProducto('Vela Bosque')">Pedir</button>
+            </div>
+          </div>
+        </div>
+                <!-- ——— PRODUCTO 4 ——— -->
+        <div class="producto-card reveal reveal-delay-2" data-categoria="vela">
+          <div class="producto-img" style="background:#e8d5b5;">
+            🪵
+            <span class="producto-badge">Vela</span>
+          </div>
+          <div class="producto-body">
+            <h3 class="producto-nombre">Vela de Canela</h3>
+            <p class="producto-desc">Trae la frescura del bosque a tu hogar con notas de pino y cedro.</p>
+            <div class="producto-footer">
+              <span class="producto-precio">Q50.00</span>
+              <button class="btn-pedir" onclick="pedirProducto('Vela Bosque')">Pedir</button>
+            </div>
+          </div>
+        </div>
+        <!-- ——— PRODUCTO 5 ——— -->
+        <div class="producto-card reveal reveal-delay-2" data-categoria="vela">
+          <div class="producto-img" style="background:#e8d5b5;">
+            🥧
+            <span class="producto-badge">Vela</span>
+          </div>
+          <div class="producto-body">
+            <h3 class="producto-nombre">Vela de Manzana y Canela</h3>
+            <p class="producto-desc">Trae la frescura del bosque a tu hogar con notas de pino y cedro.</p>
+            <div class="producto-footer">
+              <span class="producto-precio">Q50.00</span>
+              <button class="btn-pedir" onclick="pedirProducto('Vela Bosque')">Pedir</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ——— PRODUCTO 6 ——— -->
+        <div class="producto-card reveal" data-categoria="sets">
+          <div class="producto-img" style="background:#f5e6f5;">
+            💐
+            <span class="producto-badge">Set</span>
+          </div>
+          <div class="producto-body">
+            <h3 class="producto-nombre">Set Bloom Garden</h3>
+            <p class="producto-desc">Vela Con Aroma a Rosa + Jabón de Rosas</p>
+            <div class="producto-footer">
+              <span class="producto-precio">Q75.00</span>
+              <button class="btn-pedir" onclick="pedirProducto('Set Bloom Garden')">Pedir</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ——— PRODUCTO 7 ——— -->
+        <div class="producto-card reveal reveal-delay-1" data-categoria="jabon">
+          <div class="producto-img" style="background:#e8f5e9;">
+            🌿
+            <span class="producto-badge">Jabón</span>
+          </div>
+          <div class="producto-body">
+            <h3 class="producto-nombre">Jabón de Menta</h3>
+            <p class="producto-desc">Refrescante y purificante. Ideal para la ducha matutina y activar la energía.</p>
+            <div class="producto-footer">
+              <span class="producto-precio">Q20.00</span>
+              <button class="btn-pedir" onclick="pedirProducto('Jabón de Menta')">Pedir</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ——— PRODUCTO 8 ——— -->
+        <div class="producto-card reveal reveal-delay-2" data-categoria="jabon">
+          <div class="producto-img" style="background:#fff3cd;">
+            🍯
+            <span class="producto-badge">Jabón</span>
+          </div>
+          <div class="producto-body">
+            <h3 class="producto-nombre">Jabón de Miel y Cúrcuma</h3>
+            <p class="producto-desc">Nutritivo y reparador con miel pura. Para pieles sensibles o resecas.</p>
+            <div class="producto-footer">
+              <span class="producto-precio">Q20.00</span>
+              <button class="btn-pedir" onclick="pedirProducto('Jabón de Miel y Cúrcuma')">Pedir</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ——— PRODUCTO 9 ——— -->
+        <div class="producto-card reveal reveal-delay-2" data-categoria="jabon">
+          <div class="producto-img">
+            ☕
+            <span class="producto-badge">Jabón</span>
+          </div>
+          <div class="producto-body">
+            <h3 class="producto-nombre">Jabón de Café y Canela</h3>
+            <p class="producto-desc">Vela Con Aroma a Rosa + Jabón de Rosas</p>
+            <div class="producto-footer">
+              <span class="producto-precio">Q88.00</span>
+              <button class="btn-pedir" onclick="pedirProducto('Jabón de Café y Canela')">Pedir</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ——— PRODUCTO 10 ——— -->
+        <div class="producto-card reveal reveal-delay-2" data-categoria="jabon">
+          <div class="producto-img" style="background:#fff3cd;">
+            🍵
+            <span class="producto-badge">Jabón</span>
+          </div>
+          <div class="producto-body">
+            <h3 class="producto-nombre">Jabón de Manzanilla con Avena</h3>
+            <p class="producto-desc">Nutritivo y reparador con miel pura. Para pieles sensibles o resecas.</p>
+            <div class="producto-footer">
+              <span class="producto-precio">Q20.00</span>
+              <button class="btn-pedir" onclick="pedirProducto('Jabón de Manzanilla con Avena')">Pedir</button>
+            </div>
+          </div>
+        </div>
+
+                <!-- ——— PRODUCTO 11 ——— -->
+        <div class="producto-card reveal reveal-delay-2" data-categoria="jabon">
+          <div class="producto-img" style="background:#fff3cd;">
+            ⛏
+            <span class="producto-badge">Jabón</span>
+          </div>
+          <div class="producto-body">
+            <h3 class="producto-nombre">Jabón de Carbón Activado</h3>
+            <p class="producto-desc">Nutritivo y reparador con miel pura. Para pieles sensibles o resecas.</p>
+            <div class="producto-footer">
+              <span class="producto-precio">Q20.00</span>
+              <button class="btn-pedir" onclick="pedirProducto('Jabón de Carbón Activado')">Pedir</button>
+            </div>
+          </div>
+        </div>
+
+                <!-- ——— PRODUCTO 12 ——— -->
+        <div class="producto-card reveal reveal-delay-2" data-categoria="jabon">
+          <div class="producto-img">
+            🪵
+            <span class="producto-badge">Jabón</span>
+          </div>
+          <div class="producto-body">
+            <h3 class="producto-nombre">Jabón de Avena y Canela</h3>
+            <p class="producto-desc">Nutritivo y reparador con miel pura. Para pieles sensibles o resecas.</p>
+            <div class="producto-footer">
+              <span class="producto-precio">Q20.00</span>
+              <button class="btn-pedir" onclick="pedirProducto('Jabón de Avena y Canela')">Pedir</button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- ——— PRODUCTO 13 ——— -->
+        <div class="producto-card reveal reveal-delay-2" data-categoria="jabon">
+          <div class="producto-img" style="background:#fff3cd;">
+            🍚
+            <span class="producto-badge">Jabón</span>
+          </div>
+          <div class="producto-body">
+            <h3 class="producto-nombre">Jabón de Arroz con Leche</h3>
+            <p class="producto-desc">Nutritivo y reparador con miel pura. Para pieles sensibles o resecas.</p>
+            <div class="producto-footer">
+              <span class="producto-precio">Q20.00</span>
+              <button class="btn-pedir" onclick="pedirProducto('Jabón de Arroz con Leche')">Pedir</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ——— PRODUCTO 14 ——— -->
+        <div class="producto-card reveal reveal-delay-2" data-categoria="jabon">
+           <div class="producto-img" style="background:#e8d5b5;">
+            🥥
+            <span class="producto-badge">Jabón</span>
+          </div>
+          <div class="producto-body">
+            <h3 class="producto-nombre">Jabón de Coco</h3>
+            <p class="producto-desc">Nutritivo y reparador con miel pura. Para pieles sensibles o resecas.</p>
+            <div class="producto-footer">
+              <span class="producto-precio">Q20.00</span>
+              <button class="btn-pedir" onclick="pedirProducto('Jabón de Coco')">Pedir</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ——— PRODUCTO 15 ——— -->
+        <div class="producto-card reveal reveal-delay-2" data-categoria="jabon">
+          <div class="producto-img" style="background:#fff3cd;">
+            🫚
+            <span class="producto-badge">Jabón</span>
+          </div>
+          <div class="producto-body">
+            <h3 class="producto-nombre">Jabón de Jengibre</h3>
+            <p class="producto-desc">Nutritivo y reparador con miel pura. Para pieles sensibles o resecas.</p>
+            <div class="producto-footer">
+              <span class="producto-precio">Q20.00</span>
+              <button class="btn-pedir" onclick="pedirProducto('Jabón de Jengibre')">Pedir</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ——— PRODUCTO 16 ——— -->
+        <div class="producto-card reveal reveal-delay-2" data-categoria="jabon">
+          <div class="producto-img" style="background:#fff3cd;">
+            🍊
+            <span class="producto-badge">Jabón</span>
+          </div>
+          <div class="producto-body">
+            <h3 class="producto-nombre">Jabón de Mandarina</h3>
+            <p class="producto-desc">Nutritivo y reparador con miel pura. Para pieles sensibles o resecas.</p>
+            <div class="producto-footer">
+              <span class="producto-precio">Q20.00</span>
+              <button class="btn-pedir" onclick="pedirProducto('Jabón de Mandarina')">Pedir</button>
+            </div>
+          </div>
+        </div>
+
+                <!-- ——— PRODUCTO 17 ——— -->
+        <div class="producto-card reveal reveal-delay-2" data-categoria="jabon">
+          <div class="producto-img" style="background:#e8f5e9;">
+            🏖️
+            <span class="producto-badge">Jabón</span>
+          </div>
+          <div class="producto-body">
+            <h3 class="producto-nombre">Jabón Summer Fresh</h3>
+            <p class="producto-desc">Nutritivo y reparador con miel pura. Para pieles sensibles o resecas.</p>
+            <div class="producto-footer">
+              <span class="producto-precio">Q40.00</span>
+              <button class="btn-pedir" onclick="pedirProducto('Jabón Summer Fresh')">Pedir</button>
+            </div>
+          </div>
+        </div>
+
+                <!-- ——— PRODUCTO 18 ——— -->
+        <div class="producto-card reveal reveal-delay-2" data-categoria="jabon">
+          <div class="producto-img" style="background:#e8f5e9;">
+            🫧
+            <span class="producto-badge">Jabón</span>
+          </div>
+          <div class="producto-body">
+            <h3 class="producto-nombre">Jabón Kids Clean</h3>
+            <p class="producto-desc">Nutritivo y reparador con miel pura. Para pieles sensibles o resecas.</p>
+            <div class="producto-footer">
+              <span class="producto-precio">Q15.00</span>
+              <button class="btn-pedir" onclick="pedirProducto('Jabón Kids Clean')">Pedir</button>
+            </div>
+          </div>
+        </div>
+
+                <!-- ——— PRODUCTO 19 ——— -->
+        <div class="producto-card reveal reveal-delay-2" data-categoria="jabon">
+          <div class="producto-img" style="background:#fff3cd;">
+            🌹
+            <span class="producto-badge">Jabón</span>
+          </div>
+          <div class="producto-body">
+            <h3 class="producto-nombre">Jabón Rosie Garden</h3>
+            <p class="producto-desc">Nutritivo y reparador con miel pura. Para pieles sensibles o resecas.</p>
+            <div class="producto-footer">
+              <span class="producto-precio">Q15.00</span>
+              <button class="btn-pedir" onclick="pedirProducto('Jabón Rosie Garden')">Pedir</button>
+            </div>
+          </div>
+        </div>
+
+                <!-- ——— PRODUCTO 20 ——— 
+        <div class="producto-card reveal reveal-delay-2" data-categoria="jabon">
+          <div class="producto-img" style="background:#fff3cd;">
+            🍯
+            <span class="producto-badge">Jabón</span>
+          </div>
+          <div class="producto-body">
+            <h3 class="producto-nombre">Jabón de Miel</h3>
+            <p class="producto-desc">Nutritivo y reparador con miel pura. Para pieles sensibles o resecas.</p>
+            <div class="producto-footer">
+              <span class="producto-precio">Q20.00</span>
+              <button class="btn-pedir" onclick="pedirProducto('Jabón de Miel')">Pedir</button>
+            </div>
+          </div>
+        </div>-->
+
+                <!-- ——— PRODUCTO 21 ——— 
+        <div class="producto-card reveal reveal-delay-2" data-categoria="jabon">
+          <div class="producto-img" style="background:#fff3cd;">
+            🍯
+            <span class="producto-badge">Jabón</span>
+          </div>
+          <div class="producto-body">
+            <h3 class="producto-nombre">Jabón de Miel</h3>
+            <p class="producto-desc">Nutritivo y reparador con miel pura. Para pieles sensibles o resecas.</p>
+            <div class="producto-footer">
+              <span class="producto-precio">Q20.00</span>
+              <button class="btn-pedir" onclick="pedirProducto('Jabón de Miel')">Pedir</button>
+            </div>
+          </div>
+        </div>-->
+
+      </div><!-- /productos-grid -->
+    </div>
+  </section>
+
+   <!-- ============================================================
+       SECCIÓN: SOBRE NOSOTROS
+       Edita la historia, las estadísticas y la lista de valores aquí
+       ============================================================ -->
+  <section id="nosotros">
+    <div class="nosotros-wrap">
+
+      <!-- Visual decorativo izquierdo -->
+      <div class="nosotros-visual reveal">
+        <div class="nosotros-box"><img src="Documentojevo1.01.png" width="450px" height="450px"></div>
+      </div>
+
+      <!-- Texto de historia y valores -->
+      <div class="nosotros-texto reveal reveal-delay-2">
+        <span class="seccion-label">Nuestra historia</span>
+        <h2 class="seccion-titulo" style="margin-bottom:1.5rem;">
+          Sobre <em>Jevo</em>
+        </h2>
+
+        <!-- PÁRRAFOS DE HISTORIA — edítalos libremente -->
+        <p class="nosotros-historia">
+          Todo comenzó como un proyecto escolar del curso de emprendimiento. 
+          Lo que inició como una idea, rápidamente demostró ser un negocio 
+          con corazón y potencial real — y decidimos crecer.
+        </p>
+        <p class="nosotros-historia">
+          Nos inspira la <strong>decoración del hogar</strong> y el 
+          <strong>bienestar de nuestros clientes</strong>. Cada vela y cada 
+          jabón que hacemos lleva nuestra energía, cuidado y el deseo de que 
+          quien lo reciba sienta algo especial.
+        </p>
+
+        <!-- Lista de valores — agrega o quita <li> -->
+        <ul class="nosotros-lista">
+          <li><span>🌱</span> Ingredientes naturales y de calidad</li>
+          <li><span>🤍</span> Elaborado a mano, con dedicación</li>
+          <li><span>🏡</span> Pensado para tu espacio y bienestar</li>
+          <li><span>✨</span> Nació de un sueño, crece con pasión</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECCIÓN: CONTACTO Y REDES SOCIALES
+       Para agregar una red: copia un bloque .red-card
+       Cambia el href, el icono fa-*, el color de .red-icono y el texto
+       ============================================================ -->
+  <section id="contacto">
+    <div class="seccion">
+      <div class="contacto-wrap">
+        <span class="seccion-label reveal">¿Cómo puedes hacer tu pedido?</span>
+        <h2 class="seccion-titulo reveal">Encuéntranos <em>aquí</em></h2>
+        <p class="seccion-desc reveal" style="margin: 0 auto 0;">
+          Escríbenos o visita cualquiera de nuestras redes para hacer tu pedido,
+          resolver dudas o simplemente seguirnos. ¡Nos encanta saber de ti! 
+        </p>
+
+        <div class="redes-grid">
+
+          <!-- ——— INSTAGRAM ——— -->
+          <!-- Cambia href por tu perfil real de Instagram -->
+          <a class="red-card reveal"
+             href="https://instagram.com/somos.jevo"
+             target="_blank" rel="noopener">
+            <div class="red-icono instagram">
+              <i class="fa-brands fa-instagram"></i>
+            </div>
+            <div class="red-nombre">Instagram</div>
+            <!-- Cambia el nombre de usuario aquí -->
+            <div class="red-usuario">@somos.jevo</div>
+          </a>
+
+          <!-- ——— FACEBOOK ——— -->
+          <!-- Cambia href por tu página de Facebook -->
+          <a class="red-card reveal reveal-delay-1"
+             href="https://www.facebook.com/profile.php?id=61584221692465"
+             target="_blank" rel="noopener">
+            <div class="red-icono facebook">
+              <i class="fa-brands fa-facebook-f"></i>
+            </div>
+            <div class="red-nombre">Facebook</div>
+            <div class="red-usuario">Jevo Oficial</div>
+          </a>
+
+          <!-- ——— TIKTOK ——— -->
+          <!-- Cambia href por tu perfil de TikTok -->
+          <a class="red-card reveal reveal-delay-2"
+             href="https://tiktok.com/@somos.jevo"
+             target="_blank" rel="noopener">
+            <div class="red-icono tiktok">
+              <i class="fa-brands fa-tiktok"></i>
+            </div>
+            <div class="red-nombre">TikTok</div>
+            <div class="red-usuario">@somos.jevo</div>
+          </a>
+
+          <!--
+            ——— AGREGAR WHATSAPP (opcional) ———
+            Descomenta este bloque y cambia el número (CON código de país)
+            <a class="red-card reveal reveal-delay-3"
+               href="https://wa.me/502XXXXXXXX"
+               target="_blank" rel="noopener">
+              <div class="red-icono whatsapp">
+                <i class="fa-brands fa-whatsapp"></i>
+              </div>
+              <div class="red-nombre">WhatsApp</div>
+              <div class="red-usuario">+502 XXXX XXXX</div>
+            </a>
+          -->
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       FOOTER
+       Cambia el año, slogan o links si los necesitas
+       ============================================================ -->
+  <footer>
+    <strong>JEVO</strong>
+    <div class="footer-divider"></div>
+    <p>Velas &amp; Jabones Artesanales · Hecho con amor en Guatemala</p>
+    <p style="margin-top:0.5rem;opacity:0.5;font-size:0.72rem;">
+      &copy; Desde 2025. Todos los derechos reservados.
+    </p>
+  </footer>
+
+
+  <!-- ============================================================
+       JAVASCRIPT
+       ============================================================ -->
+  <script>
+    // ——————————————————————————————————————————————
+    // MENÚ HAMBURGUESA (móvil)
+    // ——————————————————————————————————————————————
+    const hamburger = document.getElementById('hamburger');
+    const navLinks  = document.getElementById('navLinks');
+
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      navLinks.classList.toggle('abierto');
+    });
+
+    // Cierra el menú al hacer click en un link
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        navLinks.classList.remove('abierto');
+      });
+    });
+
+
+    // ——————————————————————————————————————————————
+    // ANIMACIÓN DE ENTRADA AL HACER SCROLL
+    // Agrega la clase .reveal a cualquier elemento
+    // que quieras que aparezca animado al hacer scroll
+    // ——————————————————————————————————————————————
+    const observador = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observador.unobserve(entry.target); // Se anima solo una vez
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(el => observador.observe(el));
+
+
+    // ——————————————————————————————————————————————
+    // FILTRO DE PRODUCTOS
+    // Filtra las tarjetas según la categoría seleccionada
+    // ——————————————————————————————————————————————
+    const filtrosBtns = document.querySelectorAll('.filtro-btn');
+    const tarjetas    = document.querySelectorAll('.producto-card');
+
+    filtrosBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+
+        // Marca el botón activo
+        filtrosBtns.forEach(b => b.classList.remove('activo'));
+        btn.classList.add('activo');
+
+        const filtro = btn.dataset.filtro; // "todos" | "vela" | "jabon"
+
+        tarjetas.forEach(card => {
+          const cat = card.dataset.categoria;
+          // Muestra u oculta con transición suave
+          if (filtro === 'todos' || cat === filtro) {
+            card.style.display = '';
+            setTimeout(() => card.style.opacity = '1', 10);
+          } else {
+            card.style.opacity = '0';
+            setTimeout(() => card.style.display = 'none', 300);
+          }
+        });
+
+      });
+    });
+
+
+    // ——————————————————————————————————————————————
+    // BOTÓN "PEDIR" — Redirige a Instagram para hacer el pedido
+    // Cambia la URL de destino si prefieres WhatsApp u otra red:
+    //   WhatsApp: https://wa.me/502XXXXXXXX?text=Hola!%20Quiero%20pedir%20${nombre}
+    //   Instagram: https://instagram.com/jevo_ofc
+    // ——————————————————————————————————————————————
+    function pedirProducto(nombre) {
+      const mensaje = encodeURIComponent(`¡Hola! Quiero pedir: ${nombre} 🕯️`);
+      // Cambia esta URL por la que prefieras
+      const url = `https://instagram.com/somos.jevo`;
+      window.open(url, '_blank');
+    }
+
+  </script>
+
+</body>
+</html>
